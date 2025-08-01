@@ -11,7 +11,7 @@ const dirBase = path.join('./Plugins')
 for (const folder of readdirSync(dirBase)) {
   const folderPath = path.join(dirBase, folder)
   for (const file of readdirSync(folderPath).filter(f => f.endsWith('.js'))) {
-    import(`./Plugins/${folder}/${file}`).catch(console.error)
+    import(`./plugins/${folder}/${file}`).catch(console.error)
   }
 }
 import yargs from 'yargs';
