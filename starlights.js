@@ -6,6 +6,14 @@ import {fileURLToPath, pathToFileURL} from 'url'
 import {platform} from 'process'
 import * as ws from 'ws'
 import {readdirSync, statSync, unlinkSync, existsSync, readFileSync, rmSync, watch} from 'fs'
+const dirBase = path.join('./Plugins')
+
+for (const folder of readdirSync(dirBase)) {
+  const folderPath = path.join(dirBase, folder)
+  for (const file of readdirSync(folderPath).filter(f => f.endsWith('.js'))) {
+    import(`./Plugins/${folder}/${file}`).catch(console.error)
+  }
+}
 import yargs from 'yargs';
 import {spawn} from 'child_process'
 import lodash from 'lodash'
