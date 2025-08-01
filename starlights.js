@@ -6,10 +6,11 @@ import {fileURLToPath, pathToFileURL} from 'url'
 import {platform} from 'process'
 import * as ws from 'ws'
 import {readdirSync, statSync, unlinkSync, existsSync, readFileSync, rmSync, watch} from 'fs'
-const dirBase = path.join('./plugins')
-
+const dirBase = './plugins'
 for (const folder of readdirSync(dirBase)) {
   const folderPath = path.join(dirBase, folder)
+  if (!statSync(folderPath).isDirectory()) continue // ⬅️ Ignora archivos como .gitkeep
+
   for (const file of readdirSync(folderPath).filter(f => f.endsWith('.js'))) {
     import(`./plugins/${folder}/${file}`).catch(console.error)
   }
