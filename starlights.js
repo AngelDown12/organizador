@@ -6,7 +6,7 @@ import {fileURLToPath, pathToFileURL} from 'url'
 import {platform} from 'process'
 import * as ws from 'ws'
 import {readdirSync, statSync, unlinkSync, existsSync, readFileSync, rmSync, watch} from 'fs'
-const dirBase = path.join('./Plugins')
+const dirBase = path.join('./plugins')
 
 for (const folder of readdirSync(dirBase)) {
   const folderPath = path.join(dirBase, folder)
