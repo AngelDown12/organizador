@@ -15,6 +15,22 @@ for (const folder of readdirSync(dirBase)) {
     import(`./plugins/${folder}/${file}`).catch(console.error)
   }
 }
+import { readdirSync, statSync } from 'fs'
+import path from 'path'
+
+const dirBase = './plugins'
+
+for (const folder of readdirSync(dirBase)) {
+  const folderPath = path.join(dirBase, folder)
+  
+  // Ignorar si no es una carpeta (por ejemplo, archivos como .gitkeep)
+  if (!statSync(folderPath).isDirectory()) continue
+  
+  for (const file of readdirSync(folderPath).filter(f => f.endsWith('.js'))) {
+    import(`./plugins/${folder}/${file}`)
+      .catch(console.error)
+  }
+}
 import yargs from 'yargs';
 import {spawn} from 'child_process'
 import lodash from 'lodash'
